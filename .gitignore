@@ -1,1 +1,41 @@
+Api_final/.vs/
+Api_final/*.user
+Api_final/*.suo
+Api_final/*.userosscache
+Api_final/*.sln.docstates
 
+# Ignorar carpetas de compilación
+Api_final/bin/
+Api_final/obj/
+
+# Ignorar configuraciones de publicación
+Api_final/*.Publish.xml
+Api_final/*.pubxml
+Api_final/*.publishproj
+
+# Ignorar archivos de logs y temporales
+Api_final/*.log
+Api_final/*.tlog
+Api_final/*.tmp
+
+# Ignorar resultados de pruebas
+Api_final/TestResult*/
+Api_final/*.VisualState.xml
+
+# Ignorar caches de NuGet
+Api_final/*.nuget.props
+Api_final/*.nuget.targets
+Api_final/project.lock.json
+Api_final/*.nupkg
+
+# Ignorar configuraciones de IDEs
+Api_final/.vscode/
+Api_final/.idea/
+
+# Ignorar archivos del sistema
+Api_final/Thumbs.db
+Api_final/ehthumbs.db
+Api_final/Desktop.ini
+
+# Ignorar configuración local
+Makand/launchSettings.json
