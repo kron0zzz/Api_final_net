@@ -10,6 +10,7 @@ namespace Api_final.Data
 
         public DbSet<Reservas> Reservas { get; set; }
         public DbSet<EstadoReserva> EstadoReservas { get; set; }
+        public DbSet<User> User { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
