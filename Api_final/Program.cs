@@ -1,5 +1,7 @@
 using Api_final.Data; 
 using Microsoft.EntityFrameworkCore;
+using Api_final.Interfaces;
+using Api_final.Repositories;
 
 namespace Api_final
 {
@@ -11,6 +13,7 @@ namespace Api_final
 
             // Add services to the container.
             builder.Services.AddDbContext<ApiContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
