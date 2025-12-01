@@ -8,7 +8,7 @@ using Api_final.DTOs;
 namespace Api_final.Controllers
 {
     [ApiController]
-    [Route("api / [controller] ")]
+    [Route("api/[controller]")]
     public class ReservaController : ControllerBase
     {
         private readonly IReservaRepository _repository;
