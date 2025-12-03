@@ -8,8 +8,8 @@ namespace Api_final.Interfaces
 
         Task<IEnumerable<Reservas>> GetAllAsync();
         Task<Reservas?> GetByIdAsync(int id);
-        Task<Reservas> AddAsync(Reservas equipment);
-        Task<Reservas?> UpdateAsync(int id, Reservas equipment);
+        Task<Reservas> AddAsync(Reservas reservas);
+        Task<Reservas?> UpdateAsync(int id, Reservas reservas);
         Task<bool> DeleteAsync(int id);
 
     }

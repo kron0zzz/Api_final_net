@@ -1,8 +1,10 @@
-﻿using Api_final.Interfaces;
+﻿
+using Api_final.DTOs;
+using Api_final.Interfaces;
 using Api_final.Models;
 using Api_final.Services;
+using Api_final.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Api_final.DTOs;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,7 +15,6 @@ namespace Api_final.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-
         private readonly IUserRepository _users;
         private readonly PasswordService _passwords;
         private readonly JwtService _jwt;
@@ -25,43 +26,40 @@ namespace Api_final.Controllers
             _jwt = jwt;
         }
 
-
-        
-
-        // POST api/<AuthController>
+        // REGISTRO
         [HttpPost("register")]
-        public async Task<User> RegisterAsync(UserRegisterDto dto);
+        public async Task<IActionResult> Register(UserRegisterDto dto)
         {
-            var exists = await _users.GetByUserNameAsync(dto.UserName);
+            var exists = await _users.GetByUsernameAsync(dto.Username);
             if (exists != null)
                 return BadRequest("El usuario ya existe");
 
             var user = new User
             {
-                UserName = dto.UserName,
+                Username = dto.Username,
                 PasswordHash = _passwords.Hash(dto.Password)
             };
+
             await _users.RegisterAsync(user);
-            return Ok("Usuario Registrado correctamente");
+
+            return Ok("Usuario registrado correctamente");
         }
 
-
-
-        //Post Login
+        // LOGIN
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto dto)
         {
-            var user = await _users.GetByUserNameAsync(dto.UserName);
-            if (user != null)
-                return Unauthorized();
+            var user = await _users.GetByUsernameAsync(dto.Username);
+            if (user == null)
+                return Unauthorized("Usuario no encontrado");
 
             if (!_passwords.Verify(dto.Password, user.PasswordHash))
-                return Unauthorized("contraseña incorrecta");
+                return Unauthorized("Contraseña incorrecta");
 
             var token = _jwt.Generate(user);
-            return Ok(new {token} );
-        }
 
-    
+            return Ok(new { token });
+        }
     }
+
 }

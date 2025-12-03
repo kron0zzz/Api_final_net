@@ -4,9 +4,11 @@ using Api_final.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Api_final.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api_final.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ReservaController : ControllerBase

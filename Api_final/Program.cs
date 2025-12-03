@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
-namespace Api_final
+namespace Api_final 
 {
     public class Program
     {
@@ -19,6 +19,7 @@ namespace Api_final
             // Add services to the container.
             builder.Services.AddDbContext<ApiContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             builder.Services.AddScoped<PasswordService>();
             builder.Services.AddScoped<JwtService>();
