@@ -30,14 +30,15 @@ namespace Api_final.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto dto)
         {
-            var exists = await _users.GetByUsernameAsync(dto.Username);
+            var exists = await _users.GetByUserNameAsync(dto.UserName);
             if (exists != null)
                 return BadRequest("El usuario ya existe");
 
             var user = new User
             {
-                Username = dto.Username,
-                PasswordHash = _passwords.Hash(dto.Password)
+                UserName = dto.UserName,
+                PasswordHash = _passwords.Hash(dto.Password),
+                Role = dto.Role
             };
 
             await _users.RegisterAsync(user);
@@ -49,7 +50,7 @@ namespace Api_final.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto dto)
         {
-            var user = await _users.GetByUsernameAsync(dto.Username);
+            var user = await _users.GetByUserNameAsync(dto.UserName);
             if (user == null)
                 return Unauthorized("Usuario no encontrado");
 
