@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Api_final.Controllers
 {
-    [Authorize]
+    //[Authorize]        descomentar para activar el token
     [ApiController]
     [Route("api/[controller]")]
     public class ReservaController : ControllerBase
