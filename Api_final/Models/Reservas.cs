@@ -6,8 +6,14 @@ namespace Api_final.Models
     {
         public int Id { get; set; }
         public string FechaReserva { get; set; } = "";
+
+
         public int IdServicio { get; set; }
+        public Servicios? Servicios { get; set; }
+
+
         public int IdCliente { get; set; }
+        public Clientes? Clientes { get; set; }
       
 
         public int Estado { get; set; }
