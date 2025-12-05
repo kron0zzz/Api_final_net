@@ -58,9 +58,3 @@ namespace Api_final.Repositories
 
     }
 }
-namespace Api_final.Repositories
-{
-    public class ServicioRepository
-    {
-    }
-}
