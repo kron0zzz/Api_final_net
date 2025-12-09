@@ -11,13 +11,15 @@ namespace Api_final.Controllers
     //[Authorize]        descomentar para activar el token
     [ApiController]
     [Route("api/[controller]")]
-    public class ServicioController : ControllerBase
+    public class ClienteController : ControllerBase
     {
-        private readonly IServicioRepository _repository;
-        public ServicioController(IServicioRepository repository)
+        private readonly IClienteRepository _repository;
+        public ClienteController(IClienteRepository repository)
         {
             _repository = repository;
         }
+
+
 
 
         [HttpGet]
@@ -26,29 +28,43 @@ namespace Api_final.Controllers
 
 
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ServicioDto dto)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            var newSe = new Servicios
+            var cl = await _repository.GetByIdAsync(id);
+            if (cl == null) return NotFound();
+            return Ok(cl);
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] ClienteDto dto)
+        {
+            var newCl = new Clientes
             {
-                Descripcion_servicio = dto.Descripcion_servicio
-                
+                Nombre = dto.Nombre,
+                Email = dto.Email,
+                Telefono = dto.Telefono
+               
             };
 
 
-            var created = await _repository.AddAsync(newSe);
-            return Created("",created);
+            var created = await _repository.AddAsync(newCl);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] ServicioDto dto)
+        public async Task<IActionResult> Update(int id, [FromBody] ClienteDto dto)
         {
-            var update = new Servicios
+            var update = new Clientes
             {
-                Descripcion_servicio = dto.Descripcion_servicio
-                
+                Nombre = dto.Nombre,
+                Email = dto.Email,
+                Telefono = dto.Telefono
             };
 
 
