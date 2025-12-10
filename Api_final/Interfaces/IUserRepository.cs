@@ -4,7 +4,7 @@ namespace Api_final.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User?> GetByUserNameAsync(string userName);
-        Task<User> RegisterAsync(User user);
+        Task<Users?> GetByUserNameAsync(string userName);
+        Task<Users> RegisterAsync(Users user);
     }
 }

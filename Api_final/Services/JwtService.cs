@@ -20,7 +20,7 @@ namespace Api_final.Services
 
 
 
-        public string Generate(User user)
+        public string Generate(Users user)
         {
             //la clave secreta para firmar el token
             var key = new SymmetricSecurityKey(

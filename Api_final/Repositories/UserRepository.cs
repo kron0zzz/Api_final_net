@@ -14,12 +14,12 @@ namespace Api_final.Repositories
         }
 
 
-        public async Task<User?> GetByUserNameAsync(string userName)
+        public async Task<Users?> GetByUserNameAsync(string userName)
         {
             return await _context.User.FirstOrDefaultAsync(x  => x.UserName == userName);
         }
 
-        public async Task<User> RegisterAsync(User user)
+        public async Task<Users> RegisterAsync(Users user)
         {
             _context.User.Add(user);
             await _context.SaveChangesAsync();

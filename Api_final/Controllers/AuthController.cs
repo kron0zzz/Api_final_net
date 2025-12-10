@@ -34,7 +34,7 @@ namespace Api_final.Controllers
             if (exists != null)
                 return BadRequest("El usuario ya existe");
 
-            var user = new User
+            var user = new Users
             {
                 UserName = dto.UserName,
                 PasswordHash = _passwords.Hash(dto.Password),

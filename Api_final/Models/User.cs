@@ -1,6 +1,6 @@
 ﻿namespace Api_final.Models
 {
-    public class User
+    public class Users
     {
         public int Id { get; set; }
         public string UserName { get; set; } = "";
