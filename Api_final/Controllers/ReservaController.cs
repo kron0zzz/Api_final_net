@@ -44,7 +44,6 @@ namespace Api_final.Controllers
         {
             var newRe = new Reservas
             {
-                FechaReserva = dto.FechaReserva,
                 IdServicio = dto.IdServicio,
                 IdCliente = dto.IdCliente,
                 Estado = dto.Estado
@@ -62,7 +61,6 @@ namespace Api_final.Controllers
         {
             var update = new Reservas
             {
-                FechaReserva = dto.FechaReserva,
                 IdServicio = dto.IdServicio,
                 IdCliente = dto.IdCliente,
                 Estado = dto.Estado

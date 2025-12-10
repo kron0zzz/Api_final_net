@@ -5,7 +5,7 @@ namespace Api_final.Models
     public class Reservas
     {
         public int Id { get; set; }
-        public string FechaReserva { get; set; } = "";
+        public DateTime FechaReserva { get; set; } = DateTime.Now;
 
 
         public int IdServicio { get; set; }

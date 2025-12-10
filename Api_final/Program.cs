@@ -30,6 +30,8 @@ namespace Api_final
             );
             builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+            builder.Services.AddScoped<IServicioRepository, ServicioRepository>();
 
             builder.Services.AddScoped<PasswordService>();
             builder.Services.AddScoped<JwtService>();

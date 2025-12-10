@@ -5,7 +5,7 @@ namespace Api_final.DTOs
     public class ReservaDto
     {
         [Required]
-        public string FechaReserva { get; set; } = "";
+        public DateTime FechaReserva { get; set; }
 
         [Required]
         public int IdServicio { get; set; }

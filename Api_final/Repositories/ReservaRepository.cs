@@ -35,8 +35,6 @@ namespace Api_final.Repositories
             var existing = await _context.Reservas.FindAsync(id);
             if (existing == null) return null;
 
-
-            existing.FechaReserva = reservas.FechaReserva;
             existing.IdServicio = reservas.IdServicio;
             existing.IdCliente = reservas.IdCliente; 
             existing.Estado = reservas.Estado;

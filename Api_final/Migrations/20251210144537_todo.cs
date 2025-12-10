@@ -1,15 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Api_final.Migrations
 {
     /// <inheritdoc />
-    public partial class inicial : Migration
+    public partial class todo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Clientes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "EstadoReservas",
                 columns: table => new
@@ -24,7 +40,20 @@ namespace Api_final.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Servicios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descripcion_servicio = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Servicios", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -35,7 +64,7 @@ namespace Api_final.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,7 +73,7 @@ namespace Api_final.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FechaReserva = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaReserva = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdServicio = table.Column<int>(type: "int", nullable: false),
                     IdCliente = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<int>(type: "int", nullable: false)
@@ -53,9 +82,21 @@ namespace Api_final.Migrations
                 {
                     table.PrimaryKey("PK_Reservas", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Reservas_Clientes_IdCliente",
+                        column: x => x.IdCliente,
+                        principalTable: "Clientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Reservas_EstadoReservas_Estado",
                         column: x => x.Estado,
                         principalTable: "EstadoReservas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reservas_Servicios_IdServicio",
+                        column: x => x.IdServicio,
+                        principalTable: "Servicios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -64,6 +105,16 @@ namespace Api_final.Migrations
                 name: "IX_Reservas_Estado",
                 table: "Reservas",
                 column: "Estado");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservas_IdCliente",
+                table: "Reservas",
+                column: "IdCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservas_IdServicio",
+                table: "Reservas",
+                column: "IdServicio");
         }
 
         /// <inheritdoc />
@@ -73,10 +124,16 @@ namespace Api_final.Migrations
                 name: "Reservas");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Clientes");
 
             migrationBuilder.DropTable(
                 name: "EstadoReservas");
+
+            migrationBuilder.DropTable(
+                name: "Servicios");
         }
     }
 }
