@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Api_final.Controllers
 {
-    //[Authorize]        descomentar para activar el token
+    [Authorize]  
     [ApiController]
     [Route("api/[controller]")]
     public class ServicioController : ControllerBase
